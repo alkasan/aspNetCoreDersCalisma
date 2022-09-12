@@ -1,0 +1,24 @@
+﻿@model aspNetCoreDersCalisma.Models.EmpployeeAddViewModel;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add</title> 
+</head>
+<body>
+
+    <form asp-controller="Employee" asp-action ="Add">
+       <label asp-for="Employees.Id"></label> <input asp-for="Employees.Id" /><br />
+       <label asp-for="Employees.FirstName"></label> <input asp-for="Employees.FirstName" /><br />
+       <label asp-for="Employees.LastName"></label> <input asp-for="Employees.LastName" /><br />
+       <label asp-for="Employees.CityId"></label> <select asp-for="Employees.CityId" asp-items="Model.Cities"></select>
+      <button type="submit">Add</button>
+    </form>
+</body>
+</html>

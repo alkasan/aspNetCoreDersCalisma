@@ -1,6 +1,8 @@
 ﻿using aspNetCoreDersCalisma.Entities;
+using aspNetCoreDersCalisma.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace aspNetCoreDersCalisma.Controllers
 {
@@ -28,14 +30,14 @@ namespace aspNetCoreDersCalisma.Controllers
 
             var model = new EmployeeListViewModel
             {
-                Employee = employees,
+                Employees = employees,
                 Cities = cities,
             };
             return View(model);
         }
 
         public StatusCodeResult Index4()
-        {
+        { 
             return Ok();
         }
 
@@ -81,10 +83,37 @@ namespace aspNetCoreDersCalisma.Controllers
 
             var model = new EmployeeListViewModel
             {
-                Employee = employees,
+                Employees = employees,
                 Cities = cities,
             };
             return View(model);
+        }
+
+        public JsonResult Index10(string key)
+        {
+            List<Employee> employees = new List<Employee>
+            {
+                new Employee{Id=1, FirstName="Engin", LastName="Demirog",CityId=5},
+                new Employee {Id = 2, FirstName = "Derin", LastName = "Demirog", CityId = 5},
+                new Employee {Id = 3, FirstName = "Salih", LastName = "Demirog", CityId = 34}
+        };
+        
+        if(string.IsNullOrEmpty(key))
+            {
+                return Json(employees);
+            }
+            var result = employees.Where(e => e.FirstName.ToLower().Contains(key));
+            return Json(result);
+        }
+
+        public ViewResult EmployeeForm()
+        {
+            return View();
+        }
+
+        public string RouteData(int id)
+        {
+            return id.ToString();
         }
     }
 }

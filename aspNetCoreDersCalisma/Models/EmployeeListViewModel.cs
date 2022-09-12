@@ -1,11 +1,11 @@
 ﻿using aspNetCoreDersCalisma.Entities;
 using System.Collections.Generic;
 
-namespace aspNetCoreDersCalisma
+namespace aspNetCoreDersCalisma.Models
 {
     public class EmployeeListViewModel
     {
-        public List<Employee> Employee { get; set; }
+        public List<Employee> Employees { get; set; }
         public List<string> Cities { get; set; }
     }
-}
+}    
