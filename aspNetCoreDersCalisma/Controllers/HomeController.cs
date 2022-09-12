@@ -24,7 +24,7 @@ namespace aspNetCoreDersCalisma.Controllers
                 new Employee {Id = 2, FirstName = "Derin", LastName = "Demirog", CityId = 5},
                 new Employee {Id = 3, FirstName = "Salih", LastName = "Demirog", CityId = 34}
         };
-            List<string> cities = new List<string> { "İstanbul", "Ankara" };
+            List<string> cities = new List<string> { "İstanbul", "Ankara" }; 
 
             var model = new EmployeeListViewModel
             {
