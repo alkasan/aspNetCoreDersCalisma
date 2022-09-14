@@ -1,7 +1,10 @@
+using aspNetCoreDersCalisma.Models;
+using aspNetCoreDersCalisma.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -20,9 +23,11 @@ namespace aspNetCoreDersCalisma
             public void ConfigureServices(IServiceCollection services)
             {
                 services.AddMvc();
+                var connection = @"Server=(localdb)\mssqllocaldb;Database=SchoolDb;Trusted_Connection=true";
+                services.AddDbContext<SchoolContext>(options => options.UseSqlServer(connection));
                 //MvcOptions.EnableEndpointRouting =
                 services.AddMvc(option => option.EnableEndpointRouting = false);
-
+                services.AddTransient<ICalculator, Calculator18>();
 
             }
 
