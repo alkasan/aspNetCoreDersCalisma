@@ -23,9 +23,9 @@ namespace aspNetCoreDersCalisma.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Employee employee) 
+        public IActionResult Add(Employee employee)
         {
-            return View();  
+            return View();
         }
     }
 }
