@@ -18,12 +18,14 @@ namespace aspNetCoreDersCalisma.Pages.Studentp
             _context = context;
         }
         public List<Student>Students { get; set; }  
-        public void OnGet()
+        public void OnGet(string search)
         {
-            Students = _context.Students.ToList();
+           Students = string.IsNullOrEmpty(search) 
+                ?_context.Students.ToList()
+                : _context.Students.Where(s=> s.FirstName.ToLower().Contains(search)).ToList();
         }
 
-        [BindProperty]
+        [BindProperty] 
         public Student Student { get; set; }
         public IActionResult OnPost()
         {

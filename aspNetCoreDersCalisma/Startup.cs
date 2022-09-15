@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EnvironmentName = Microsoft.Extensions.Hosting.EnvironmentName;
 
 namespace aspNetCoreDersCalisma
 {
@@ -28,6 +29,8 @@ namespace aspNetCoreDersCalisma
                 //MvcOptions.EnableEndpointRouting =
                 services.AddMvc(option => option.EnableEndpointRouting = false);
                 services.AddTransient<ICalculator, Calculator18>();
+                services.AddSession();
+                services.AddDistributedMemoryCache();
 
             }
 
@@ -35,16 +38,22 @@ namespace aspNetCoreDersCalisma
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseStaticFiles();
+            env.EnvironmentName = EnvironmentName.Production;
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/error");
+            }
+            app.UseSession();
 
             app.UseMvc(ConfigureRoutes);
         }
         private void ConfigureRoutes(IRouteBuilder routeBuilder)
         {
-            routeBuilder.MapRoute("Default", "{controller=Home}/{action=Index2}/{id?}");
+            routeBuilder.MapRoute("Default", "{controller=Filter}/{action=Index}/{id?}");
             routeBuilder.MapRoute("MyRoute", "Engin/{controller=Home}/{action=Index3}/{id?}");
         }
 

@@ -1,8 +1,11 @@
 ﻿using aspNetCoreDersCalisma.Entities;
+using aspNetCoreDersCalisma.Filters;
 using aspNetCoreDersCalisma.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 
 namespace aspNetCoreDersCalisma.Controllers
 {
@@ -13,8 +16,10 @@ namespace aspNetCoreDersCalisma.Controllers
             return "hello my first app!";
         }
 
+        [HandleException(ViewName = "DivideByZeroException", ExceptionType = typeof(DivideByZeroException))]
         public ViewResult Index2()
         {
+            throw new DivideByZeroException();
             return View();
         }
 
